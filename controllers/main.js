@@ -31,33 +31,40 @@ const checkYear = (year,sy,ey)=>{
     // console.log("hello")
 }
 //this callback function will be used in 1.director page
-const getspecifics = async(req,res)=>{
-    const {Syear,Eyear,publications} = req.query;
+const getspecifics = async (req, res) => {
+    const { Syear, Eyear, publications } = req.query;
     const sy = Number(Syear);
     const ey = Number(Eyear);
     const pub = Number(publications);
     const result = await model.find({});
-    let object = []
-    if(!result)
-    {
-        throw new CustomAPIError('No result that matches your specifications',404);
-       
+    if (!result) {
+      throw new CustomAPIError("No result that matches your specifications", 404);
     }
-    // console.log(result)
-    for(i in result)
-    {
-        const pubs = Number(result[i]._pub)
-        let year = result[i]._year;
-        // console.log("hello")
-        if((checkYear(year,sy,ey)) && pubs>=pub)
-        {
-            object.push(result[i])
-        }
-    }
-    // console.log(object);
-    res.status(200).json({result:object});
-}
-
+  
+    let object = result.filter((doc) => {
+      let pubs = Number(doc._pub);
+      let year = doc._year;
+      let flag = 0;
+      const n = year.length;
+      for (let i = 0; i < n; i++) 
+      {
+          let y = Number(year[i]);
+          if (y >= sy && y <= ey)
+          {
+        
+              flag = 1;
+              break
+          }
+          else
+          {
+              flag = 0;
+              continue
+          }
+      }
+      return (pubs >= pub && flag==1);
+    });
+    res.status(200).json({ result: object });
+  };
 
 
 const getall = async (req,res)=>{
