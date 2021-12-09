@@ -1,11 +1,11 @@
 const model = require('../models/Author');//mongoose model
-const CustomAPIError = require('../../../node-express-course/05-JWT-Basics/starter/errors/custom-error');
+const CustomAPIError = require('../errors/custom-error');
 
 //search page (basic functionlity) to  search through our monogDb collection.
 //this callback function will be used in 1.search page 2.profile page
 const getAuthor =  async(req,res)=>{
     const {name} = req.query; 
-    console.log(name);
+        console.log(name);
     const author = await model.findOne({'_authName':name});
     if(!author)
     {
