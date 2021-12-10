@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="CSS/general.css" />
+    <link rel="stylesheet" href="CSS/table.css" />
     
     <link rel="stylesheet" href="CSS/style.css" />
     <!-- LOGIN PAGE-->
@@ -35,7 +36,7 @@
             <li><a class="main-nav-link" href="#">Section 3</a></li> -->
   
             <!-- DIRECTOR'S LOGIN BUTTON -->
-            <li><a href="faculty-profile.html" class="btn director--login">LOGOUT</a></li>
+            <li><a href="index.html" class="btn director--login">LOGOUT</a></li>
           </ul>
         </nav>
       </header>
@@ -50,6 +51,7 @@
         <!-- Director -->
 
         <!-- DIRECTOR PROFILE -->
+      <!-- 
       <div class="boxed-director">
         <section class="profile-director">
           <div class="container grid grid-cols-2 grid-profile">
@@ -74,17 +76,17 @@
           </div>
         </section>
       </div>
-
+      -->
 
         <div class="searchbar">
-           <input type="text" class="searchbar-text" placeholder="start year" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input id="start_year" type="text" class="searchbar-text" placeholder="start year" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            
-           <input type="text" class="searchbar-text" placeholder="end year" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input id="end_year"  type="text" class="searchbar-text" placeholder="end year" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            
-           <input type="text" class="searchbar-text" placeholder="no.of publications " />
+           <input id="number_pub" type="text" class="searchbar-text" placeholder="no.of publications " />
            <br><br><br>
    
-           <a class="searchbar-icon" href="#">
+           <a class="searchbar-icon" href="#" onClick="getauthors()">
              <svg
                xmlns="http://www.w3.org/2000/svg"
                class="icon--search"
@@ -103,32 +105,34 @@
          </div>
        
 
-<!--Search Results -->
-<div class="boxed-res">
-    <section class="profile-res">
-      <div class="container grid grid-cols-2 grid-profile">
-        <div class="img-box">
-          <img
-            src="IMG/user-img.png"
-            class="f-img"
-            alt="passport size faculty image"
-          />
-        </div>
-        <div class="text-box">
-          <h2 class="secondary-heading f-name">John Smith</h2>
-          <p class="f-email">
-            <a class="email-link" href="mailto:hello@example.com"
-              >hello@example.com</a
-            >
-          </p>
-          <p class="dblp">
-            <a class="dblp-link" href="#">dblpid</a>
-          </p>
-        </div>
+    <!--Search Results -->
+    <!--for table-->
+         
+    <div id="res_table" class="table">
+      <div id="res_root">
+          <table border="2px" width="1500px" >
+              <tr>
+                  <th id ="res_name" data-column="Username" data-order="desc"><h2>NAME</h2> </th>
+                  <th id="res_email" data-column="Identifier" data-order="desc"><h2>EMAIL</h2> </th>
+                  <th id="res_dblp_id"  data-column="firstName" data-order="desc"><h2>DBLP-ID</h2></th>
+                  <th id="res_num_pub"  data-column="firstName" data-order="desc"><h2>TOTAL NUMBER OF PUBLICATION</h2></th>
+              </tr>
+              <tbody id="res_myTable">
+                
+              </tbody>
+          </table>
       </div>
-    </section>
+  </div>    
+  
+    <!--for container-->
+    <!--<div class="container">
+      
+      
+      </div>
+    -->
   </div>
-
-</div>
-  </body>
+  <script src="browser-app.js"></script> 
+  <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+</body>
 </html>

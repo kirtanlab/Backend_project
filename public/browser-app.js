@@ -11,8 +11,9 @@ let authorArray = ['Narayanan C. Krishnan', 'R Nitin Auluck', 'Neeraj Goel', 'De
 let updatedArray = []
 var name;
 
-
-
+//R Nitin Auluck
+//Ram Subramanian
+//T V Kalyan
 
 //INDEX FILE
 
@@ -56,9 +57,85 @@ const getname = async () => {
     }
     
 }
+//for director page
+const getauthors = async () => {
+  let start_year = document.getElementById("start_year").value;
+  let end_year = document.getElementById("end_year").value;
+  let number_pub = document.getElementById("number_pub").value;
+  //console.log("start year "+ start_year+" end year "+ end_year+" number pub "+ number_pub);
+
+  const api = await fetch(`/api/V1/specifics?Syear=${start_year}&Eyear=${end_year}&publications=${number_pub}`);
+  const api_data = await api.json();
+  const array_data = api_data.result;
+  console.log(array_data)
+
+  //connecting to frontend
+  
+  /*making table*/
+  
+  res_buildTable()
+
+    function res_buildTable() {
+        var table = document.getElementById('res_myTable')
+        table.innerHTML = ''
+        for (var i = 0; i < array_data.length; i++) {
+            var row = `<tr>
+                        <td id="td">${array_data[i]._authName}</td>
+                        <td>${array_data[i]._email}</td>
+                        <td>${array_data[i]._dblp_id}</td>
+                        <td>${array_data[i]._pub}</td>
+                        </tr>`
+            table.innerHTML += row;
+            //console.log("pubs: ["+i+"]"+pubs[i]);
+        }
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //making containers available
+  /*
+  for(let i=0;i < array_data.length;i++){
+    const makecontainer = () => {
+      return `
+      <div class="boxed-res">
+          <section class="profile-res">
+            <div class="container grid grid-cols-2 grid-profile">
+              <div class="img-box">
+                <img
+                  src="IMG/user-img.png"
+                  class="f-img"
+                  alt="passport size faculty image"
+                />
+              </div>
+              <div class="text-box">
+                <h2 id="auth_name"class="secondary-heading f-name">${array_data[i]._authName}</h2>
+                <p class="f-email">
+                  <a id="auth_email_id" class="email-link" href="#"
+                    >${array_data[i]._email}</a
+                  >
+                </p>
+                <p class="dblp">
+                  <a id="auth_dblp_id" class="dblp-link" href="${array_data[i]._dblp_id}">${array_data[0]._dblp_id}</a>
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;   
+    };
+    $('.container').append(makecontainer)
+  }
+  */
+}
 
 
-console.log("global"+ name);
 //fetching data and displaying it from dblp api
 const getdata = async(name)=>{
 
